@@ -1,6 +1,7 @@
 # Short Responses
 
 For this short response assignment, aim to write a response with the following qualities (your instructor will give you feedback on these areas):
+
 - [] Addresses all parts of the prompt
 - [] Accurately uses relevant technical terminology
 - [] Is free of grammar and spelling mistakes (double check with grammarly!)
@@ -17,7 +18,15 @@ What are the core principles of encapsulation in object-oriented programming?
 
 ### Response 1
 
-Your response here...
+Here are the core principles of encapsulation:
+
+- Encapsulation means keeping data and the functions that use that data together in one object.
+
+- It hides the object’s internal details so other parts of the program can’t change them directly.
+
+- Data is accessed or updated through special methods like getters and setters.
+
+- This helps protect the data, keeps the code organized, and makes it easier to update or fix later.
 
 ---
 
@@ -32,14 +41,21 @@ const multiplyNumsBy = (nums, multiplier) => {
   return nums.map((num) => num * multiplier);
 };
 
-const multiplesOfFive = multiplyNumsBy([1,2,3,4], 5); // [5, 10, 15, 20]
+const multiplesOfFive = multiplyNumsBy([1, 2, 3, 4], 5); // [5, 10, 15, 20]
 ```
 
 First, define what a **closure** is in your own words and then explain how this example includes a closure.
 
 ### Response 2
 
-Your response here...
+#### **Define Closure**
+
+- A **closure** is when a function remembers and can use variables from the place where it was created, even after that place has finished running.
+- It allows a function to keep access to old variables, even when it’s used somewhere else later.
+
+### **Code Snippet Explanation:**
+
+The function inside `.map()` is a **closure** because it uses the `multiplier` variable from the outer function `multiplyNumsBy`. It remembers that value even when run separately for each number.
 
 ---
 
@@ -55,16 +71,16 @@ const makeAnimal = (name, species, sound) => {
     name: name,
     species: species,
     makeNoise: () => {
-      console.log(`${this.name} the ${this.species} says ${sound}`)
-    }
-  }
+      console.log(`${this.name} the ${this.species} says ${sound}`);
+    },
+  };
   return animal;
-}
+};
 
-const betty = makeAnimal('betty', 'cat', 'meow');
+const betty = makeAnimal("betty", "cat", "meow");
 betty.makeNoise(); // undefined the undefined says meow
 
-const bugs = makeAnimal('bugs', 'bunny', 'whatsup doc');
+const bugs = makeAnimal("bugs", "bunny", "whatsup doc");
 bugs.makeNoise(); // undefined the undefined says meow says whatsup doc
 ```
 
@@ -76,4 +92,21 @@ Finally, update the code snippet above to fix it.
 
 ### Response 3
 
-Your response here...
+### **Answer:**
+
+**Definition of `this`:**
+The `this` keyword refers to the object that is currently calling the function. It allows methods inside an object to access that object’s own properties.
+
+**Explanation of the problem:**
+The `makeNoise` method is written as an **arrow function**, and arrow functions do **not have their own `this`**. Instead, they use the `this` value from the surrounding scope (in this case, the global scope).
+Because of that, `this.name` and `this.species` don’t point to the `animal` object — they are `undefined`.
+
+To fix it, you can use a **regular function** instead of an arrow function:
+
+```js
+makeNoise: function() {
+  console.log(`${this.name} the ${this.species} says ${sound}`);
+}
+```
+
+Now, `this` correctly refers to the `animal` object.
